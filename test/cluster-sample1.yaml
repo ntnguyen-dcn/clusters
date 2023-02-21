@@ -1,0 +1,54 @@
+{
+     "kind": "Cluster",
+     "apiVersion": "intent.automation.dcn.ssu.ac.kr/v1",
+     "metadata": {
+         "name": "cluster-sample1",
+         "namespace": "default",
+         "creationTimestamp": null,
+         "labels": {
+             "app.kubernetes.io/created-by": "kubernetes-as-a-service",
+             "app.kubernetes.io/instance": "cluster-sample",
+             "app.kubernetes.io/managed-by": "kustomize",
+             "app.kubernetes.io/name": "cluster",
+             "app.kubernetes.io/part-of": "kubernetes-as-a-service",
+             "automation.dcn.ssu.ac.kr/region": "kr-seoul",
+             "automation.dcn.ssu.ac.kr/zone": "public"
+         }
+     },
+     "spec": {
+         "infrastructure": [
+             {
+                 "name": "openstack",
+                 "spec": {
+                     "name": "openstack-small-cluster",
+                     "type": "ClusterTemplate",
+                     "revision": "1.0.0"
+                 },
+                 "override": {
+                     "kubernetesVersion": "v1.25.0"
+                 }
+             },
+             {
+                 "name": "flannel",
+                 "spec": {
+                     "name": "flannel-default",
+                     "type": "CNITemplate",
+                     "revision": "1.0.0"
+                 },
+                 "override": {
+                     "revision": "1.1.1"
+                 }
+             }
+         ],
+         "software": [
+             {
+                 "name": "prometheus",
+                 "spec": {
+                     "name": "prometheus-default",
+                     "type": "ApplicationTemplate"
+                 }
+             }
+         ]
+     },
+     "status": {}
+ }
